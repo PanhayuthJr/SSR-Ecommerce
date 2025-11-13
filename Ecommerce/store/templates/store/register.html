@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Ecom</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <style>
+        body {
+            background: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .register-card {
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            padding: 40px;
+            background: #fff;
+            width: 100%;
+            max-width: 450px;
+        }
+        .register-card h2 {
+            margin-bottom: 30px;
+            font-weight: bold;
+            color: #343a40;
+            text-align: center;
+        }
+        .form-control {
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+        .btn-register {
+            border-radius: 50px;
+            padding: 10px;
+            font-weight: bold;
+            background: #ffc107;
+            border: none;
+            color: #fff;
+            width: 100%;
+            transition: 0.3s;
+        }
+        .btn-register:hover {
+            background: #e0a800;
+        }
+        .text-center a {
+            color: #343a40;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .text-center a:hover {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-card">
+
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <h2>Create Your Account</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-register mt-3">Sign Up</button>
+        </form>
+        <div class="text-center mt-3">
+            <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

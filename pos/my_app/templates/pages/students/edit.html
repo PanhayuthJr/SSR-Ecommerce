@@ -1,0 +1,83 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<section class="content">
+  <div class="row">
+    <section class="col-lg-12 connectedSortable">
+      <div class="box box-primary">
+        <div class="box-header">
+          <i class="glyphicon glyphicon-pencil"></i>
+          <h3 class="box-title">
+              <a class="text-success">Edit Student</a>
+              {% if messages %}
+                  {% for message in messages %}
+                      <span class="text-success" style="margin-left: 144px">{{ message }}</span>
+                  {% endfor %}
+              {% endif %}
+          </h3>
+        </div><!-- /.box-header -->
+
+        <div class="box-body">
+          <form class="form-horizontal" action="{% url 'update_student' student.id %}" method="post">
+              {% csrf_token %}
+
+              <!-- First Name -->
+              <div class="form-group">
+                  <label class="control-label col-sm-2">First Name:</label>
+                  <div class="col-sm-4">
+                      <input type="text" name="first_name" value="{{ student.first_name }}" class="form-control" placeholder="Enter First Name" required>
+                  </div>
+              </div>
+
+              <!-- Last Name -->
+              <div class="form-group">
+                  <label class="control-label col-sm-2">Last Name:</label>
+                  <div class="col-sm-4">
+                      <input type="text" name="last_name" value="{{ student.last_name }}" class="form-control" placeholder="Enter Last Name" required>
+                  </div>
+              </div>
+
+              <!-- Gender -->
+              <div class="form-group">
+                  <label class="control-label col-sm-2">Gender:</label>
+                  <div class="col-sm-4">
+                      <select name="gender" class="form-control" required>
+                          <option value="">Select Gender</option>
+                          <option value="M" {% if student.gender == 'M' %}selected{% endif %}>Male</option>
+                          <option value="F" {% if student.gender == 'F' %}selected{% endif %}>Female</option>
+                      </select>
+                  </div>
+              </div>
+
+              <!-- Date of Birth -->
+              <div class="form-group">
+                  <label class="control-label col-sm-2">Date of Birth:</label>
+                  <div class="col-sm-4">
+                      <input type="date" name="dob" value="{{ student.dob }}" class="form-control" required>
+                  </div>
+              </div>
+
+              <!-- Address -->
+              <div class="form-group">
+                  <label class="control-label col-sm-2">Address:</label>
+                  <div class="col-sm-4">
+                      <textarea name="address" class="form-control" rows="3" required>{{ student.address }}</textarea>
+                  </div>
+              </div>
+
+              <!-- Buttons -->
+              <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="{% url 'student_index' %}" class="btn btn-link text-primary">Student List</a>
+    </div>
+</div>
+          </form>
+        </div><!-- /.box-body -->
+
+        <div class="box-footer clearfix no-border"></div>
+      </div><!-- /.box -->
+    </section>
+  </div>
+</section>
+{% endblock %}

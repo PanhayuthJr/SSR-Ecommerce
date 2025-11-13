@@ -1,0 +1,82 @@
+{% extends "index.html" %}
+{% load  static %}
+{%  block content %}
+<section class="content">
+          <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12 connectedSortable">
+              <div class="box box-primary">
+                <div class="box-header">
+                  <i class="glyphicon glyphicon-plus"></i>
+                  <h3 class="box-title">
+                      <a href="/category/show">Add Category</a>
+                        {% if message %}
+                            {% for message in messages %}
+                      <span style="margin-left:140px; color:red ">{{ message }}</span>
+
+                            {% endfor %}
+                      {% endif %}
+                  </h3>
+
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Category Name</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for item in categories %}
+      <tr>
+        <td>{{ item.id }}</td>
+        <td>{{ item.category_name }}</td>
+        <td>
+
+            <a href="{% url 'edit_category' item.id %}" class="glyphicon glyphicon-pencil btn btn-primary">Edit</a>
+            <a class="glyphicon glyphicon-eye-open btn btn-success">View</a>
+            <a href="{% url 'delete_category' item.id %}" class="glyphicon glyphicon-trash btn btn-danger">Delete</a>
+
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+
+                </div>
+                <div class="box-footer clearfix no-border">
+<div>
+<p>Item Count: {{count_item}}</p>
+<p>Page {{ categories.number }} of {{ categories.paginator.num_pages }}</p>
+</div>
+<ul class="pagination">
+{% if categories.has_previous %}
+<li><a href="?page=1" style="color:white;background-color:green">&laquo; first</a></li>
+<li><a href="?page={{ categories.previous_page_number }}" style="color:white ; background-color:mediumblue">previous</a> </li>
+{% else %}
+<li><a style="color:white;background-color:mediumblue">previous</a> </li>
+{% endif %}
+{% for i in categories.paginator.page_range %}
+{% if categories.number == i %}
+<li><a href="#" style="color:white;background-color: blue;">{{ i }}</a></li>
+{% else %}
+<li><a href="?page={{ i }}" style="color:black;">{{ i }}</a></li>
+{% endif %}
+{% endfor %}
+{% if categories.has_next %}
+<li><a href="?page={{ categories.next_page_number }}" style="color:white;background-color:
+green">next</a></li>
+<li><a href="?page={{ categories.paginator.num_pages }}" style="color:white;background-color:
+mediumblue">last &raquo;</a></li>
+{% endif %}
+</ul>
+                </div>
+              </div><!-- /.box -->
+
+            </section>
+          </div>
+    </section>
+
+{% endblock %}

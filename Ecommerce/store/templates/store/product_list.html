@@ -1,0 +1,20 @@
+{% extends 'store/main.html' %}
+{% block content %}
+<h2>Products</h2>
+<a href="{% url 'product_create' %}" class="btn btn-success">Add Product</a>
+<table class="table mt-3">
+  <tr><th>ID</th><th>Name</th><th>Price</th><th>Category</th><th>Actions</th></tr>
+  {% for p in products %}
+  <tr>
+    <td>{{ p.id }}</td>
+    <td>{{ p.name }}</td>
+    <td>{{ p.price }}</td>
+    <td>{{ p.category }}</td>
+    <td>
+      <a href="{% url 'product_update' p.id %}" class="btn btn-primary btn-sm">Edit</a>
+      <a href="{% url 'product_delete' p.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

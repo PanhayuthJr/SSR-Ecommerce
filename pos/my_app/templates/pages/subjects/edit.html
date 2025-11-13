@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<section class="content">
+  <div class="row">
+    <section class="col-lg-12 connectedSortable">
+      <div class="box box-primary">
+        <div class="box-header">
+          <i class="glyphicon glyphicon-edit"></i>
+          <h3 class="box-title">
+            <span class="text-success">Edit Subject</span>
+            {% if messages %}
+              {% for message in messages %}
+                <span class="text-success" style="margin-left: 20px">{{ message }}</span>
+              {% endfor %}
+            {% endif %}
+          </h3>
+        </div>
+
+        <div class="box-body">
+          <form class="form-horizontal" action="/subject/update_by_id/{{ subject.id }}/" method="post">
+            {% csrf_token %}
+
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="subject_name">Subject Name:</label>
+              <div class="col-sm-4">
+                <input type="text" name="subject_name" value="{{ subject.subject_name }}" class="form-control" placeholder="Enter Subject Name" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <a href="/subject/index/" class="btn btn-link text-primary">Subject List</a>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="box-footer clearfix no-border"></div>
+      </div>
+    </section>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+<section class="content">
+  <div class="row">
+    <section class="col-lg-12 connectedSortable">
+      <div class="box box-primary">
+        <div class="box-header">
+          <i class="glyphicon glyphicon-plus"></i>
+          <h3 class="box-title">
+            <a href="{% url 'create_teacher' %}" class="btn btn-success">Add Teacher</a>
+            {% if messages %}
+              {% for message in messages %}
+                <span style="margin-left:20px; color:green">{{ message }}</span>
+              {% endfor %}
+            {% endif %}
+          </h3>
+        </div><!-- /.box-header -->
+
+        <div class="box-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Gender</th>
+                <th>Date of Birth</th>
+                <th>Address</th>
+                <th>Salary</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for item in teachers %}
+              <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.first_name }}</td>
+                <td>{{ item.last_name }}</td>
+                <td>{{ item.gender }}</td>
+                <td>{{ item.dob }}</td>
+                <td>{{ item.address }}</td>
+                <td>{{ item.salary }}</td>
+                <td>
+                  <a href="{% url 'edit_teacher' item.id %}" class="glyphicon glyphicon-pencil btn btn-primary">Edit</a>
+                  <a href="{% url 'delete_teacher' item.id %}" class="glyphicon glyphicon-trash btn btn-danger" onclick="return confirm('Are you sure?');">Delete</a>
+                </td>
+              </tr>
+              {% empty %}
+              <tr>
+                <td colspan="8" style="text-align:center">No teachers found.</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box-footer clearfix no-border">
+          <div>
+            <p>Total Teachers: {{ count_item }}</p>
+            <p>Page {{ teachers.number }} of {{ teachers.paginator.num_pages }}</p>
+          </div>
+
+          <ul class="pagination">
+            {% if teachers.has_previous %}
+              <li><a href="?page=1" class="btn btn-sm btn-success">&laquo; First</a></li>
+              <li><a href="?page={{ teachers.previous_page_number }}" class="btn btn-sm btn-primary">Previous</a></li>
+            {% else %}
+              <li><a class="btn btn-sm btn-primary disabled">Previous</a></li>
+            {% endif %}
+
+            {% for i in teachers.paginator.page_range %}
+              {% if teachers.number == i %}
+                <li><a href="#" class="btn btn-sm btn-info">{{ i }}</a></li>
+              {% else %}
+                <li><a href="?page={{ i }}" class="btn btn-sm btn-light">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            {% if teachers.has_next %}
+              <li><a href="?page={{ teachers.next_page_number }}" class="btn btn-sm btn-success">Next</a></li>
+              <li><a href="?page={{ teachers.paginator.num_pages }}" class="btn btn-sm btn-primary">Last &raquo;</a></li>
+            {% endif %}
+          </ul>
+        </div>
+      </div><!-- /.box -->
+    </section>
+  </div>
+</section>
+{% endblock %}

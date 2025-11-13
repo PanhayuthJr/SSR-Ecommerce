@@ -1,0 +1,18 @@
+{% extends 'store/main.html' %}
+{% block content %}
+<h2>Categories</h2>
+<a href="{% url 'category_create' %}" class="btn btn-success">Add Category</a>
+<table class="table mt-3">
+  <tr><th>ID</th><th>Name</th><th>Actions</th></tr>
+  {% for c in categories %}
+  <tr>
+    <td>{{ c.id }}</td>
+    <td>{{ c.name }}</td>
+    <td>
+      <a href="{% url 'category_update' c.id %}" class="btn btn-primary btn-sm">Edit</a>
+      <a href="{% url 'category_delete' c.id %}" class="btn btn-danger btn-sm">Delete</a>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+{% endblock %}

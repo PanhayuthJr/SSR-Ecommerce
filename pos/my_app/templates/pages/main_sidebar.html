@@ -1,0 +1,61 @@
+{% load static %}
+<aside class="main-sidebar">
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+            </div>
+            <div class="pull-left info">
+                <p>Alexander Pierce</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+
+        <!-- Search form -->
+        <form action="{{ request.path }}" method="get" class="sidebar-form">
+            <div class="input-group">
+                <input type="text" name="search_item" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-flat">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </span>
+            </div>
+        </form>
+
+        <!-- Sidebar menu -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+
+            <!-- Dashboard -->
+            <li class="active treeview">
+                <a href="/"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+            </li>
+
+            <!-- Inventory Stock -->
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-pie-chart"></i>
+                    <span>Inventory Stock</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/product/index"><i class="fa fa-circle-o"></i> Product</a></li>
+                    <li><a href="/category/index"><i class="fa fa-circle-o"></i> Category</a></li>
+                    <li><a href="/student/index/"><i class="fa fa-circle-o"></i> Student</a></li>
+                    <li><a href="/subject/index/"><i class="fa fa-circle-o"></i> Subject</a></li>
+                    <li><a href="/teacher/index/"><i class="fa fa-circle-o"></i> Teacher</a></li>
+                </ul>
+            </li>
+
+            <!-- Calendar -->
+            <li>
+                <a href="/pages/calendar.html">
+                    <i class="fa fa-calendar"></i> <span>Calendar</span>
+                    <small class="label pull-right bg-red">3</small>
+                </a>
+            </li>
+        </ul>
+    </section>
+</aside>

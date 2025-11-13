@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Ecom</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: #f4f6f8;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 400px;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .login-card h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        .form-control {
+            border-radius: 50px;
+            padding: 10px 20px;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #ffc107;
+        }
+
+        .btn-login {
+            width: 100%;
+            background-color: #ffc107;
+            border: none;
+            font-weight: 600;
+            border-radius: 50px;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        .btn-login:hover {
+            background-color: #e0a800;
+        }
+
+        .text-center a {
+            color: #ffc107;
+            font-weight: 500;
+        }
+
+        .text-center a:hover {
+            color: #e0a800;
+            text-decoration: none;
+        }
+
+        .alert {
+            border-radius: 50px;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-card">
+
+    <!-- Display messages -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <h2>Login to Ecom</h2>
+    <form method="POST" novalidate>
+        {% csrf_token %}
+        {% if form.errors %}
+            <div class="alert alert-danger">Invalid username or password.</div>
+        {% endif %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" placeholder="Enter username" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-login mt-3">Login</button>
+    </form>
+
+    <div class="text-center mt-3">
+        <p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
